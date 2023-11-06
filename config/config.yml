@@ -1,6 +1,6 @@
-bold_dir: ''
-surf_dir: ''
-output_dir: ''
+bold_dir: '/project/6050199/alit/EpLink/eplink-p3-denoise-out/results'
+surf_dir: '/project/6050199/alit/EpLink/eplink-p3-hcp-mmp-out/hcp_mmp'
+output_dir: '/project/6050199/alit/EpLink/eplink-p3-resample2fsLR'
 
 hemi:
   - L
