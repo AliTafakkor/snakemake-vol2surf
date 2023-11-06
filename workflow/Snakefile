@@ -9,12 +9,12 @@ valid_inputs = inputs["bold"].filter(**inputs["midthickness"].entities["subject"
 
 rule vol2surf:
     input:
-        bold = "{bold_dir}/sub-{subject}/func/sub-{subject}_task-{task}_run-{run}_space-T1w_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.nii.gz",
-        midthickness = "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_midthickness.surf.gii",
-        white = "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_white.surf.gii",
-        pial = "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_pial.surf.gii"
+        bold = config['bold_dir']+"/sub-{subject}/func/sub-{subject}_task-{task}_run-{run}_space-T1w_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.nii.gz",
+        midthickness = config['surf_dir']+"/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_midthickness.surf.gii",
+        white = config['surf_dir']+"/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_white.surf.gii",
+        pial = config['surf_dir']+"/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_pial.surf.gii"
     output:
-        "{output_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_task-{task}_run-{run}_space-native_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.func.gii"
+        config['output_dir']+"/sub-{subject}/sub-{subject}_hemi-{hemi}_task-{task}_run-{run}_space-native_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.func.gii"
     shell:
         "wb_command -volume-to-surface-mapping {input.bold} {input.midthickness} {output} -ribbon-constrained {input.white} {input.pial}"
 
@@ -24,7 +24,7 @@ rule metric_resample:
         curr_sphere = "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-fsaverage_sphere.reg.surf.gii",
         target_sphere = "resources/standard_mesh_atlases/resample_fsaverage/fs_LR-deformed_to-fsaverage.{hemi}.sphere.32k_fs_LR.surf.gii"
     output:
-        "{output_dir}/32k_space_surfaces/sub-{subject}/sub-{subject}_hemi-{hemi}_task-{task}_run-{run}_space-fsLR_den-32k_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.func.gii"
+        config['output_dir']+"/32k_space_surfaces/sub-{subject}/sub-{subject}_hemi-{hemi}_task-{task}_run-{run}_space-fsLR_den-32k_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.func.gii"
     shell:
         "wb_command -metric-resample {input.vol2surf_out} {input.curr_sphere} {input.target_sphere} BARYCENTRIC {output}"
 
