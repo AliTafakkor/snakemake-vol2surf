@@ -6,12 +6,6 @@ inputs = generate_inputs(bids_dir="", pybids_inputs=config["pybids_inputs"])
 
 valid_inputs = inputs["bold"].filter(**inputs["midthickness"].entities["subject",])
 
-rule all:
-    input:
-        expand(
-            valid_inputs.expand(rules.metric_resample.output, allow_missing=True),
-            hemi=config['hemi']
-        )
 
 rule vol2surf:
     input:
@@ -33,3 +27,11 @@ rule metric_resample:
         "{output-dir}/32k_space_surfaces/sub-{subject}/sub-{subject}_hemi-{hemi}_task-{task}_run-{run}_space-fsLR_den-32k_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.func.gii"
     shell:
         "wb_command -metric-resample {input.vol2surf_out} {input.curr_sphere} {input.target_sphere} BARYCENTRIC {output}"
+
+rule all:
+    input:
+        expand(
+            valid_inputs.expand(rules.metric_resample.output, allow_missing=True),
+            hemi=config['hemi']
+        )   
+    default_target: True
