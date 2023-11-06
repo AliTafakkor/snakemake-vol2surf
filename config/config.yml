@@ -1,3 +1,48 @@
 bold_dir: ''
 surf_dir: ''
 output_dir: ''
+
+hemi:
+  - L
+  - R
+
+fwhm:
+  - 0
+  - 5
+  - 10
+
+conf:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+
+pybids_inputs:
+  bold:
+    wildcards:
+      - subject
+      - task
+      - run
+      - fwhm
+      - conf
+    custom_path:
+      "{bold_dir}/sub-{subject}/func/sub-{subject}_task-{task}_run-{run}_space-T1w_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.nii.gz"
+  midthickness:
+    wildcards:
+      - subject
+      - hemi
+    custom_path:
+      "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_midthickness.surf.gii"
+  white:
+    wildcards:
+      - subject
+      - hemi
+    custom_path:
+      "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_white.surf.gii"
+  pial:
+    wildcards:
+      - subject
+      - hemi
+    custom_path:
+      "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_pial.surf.gii"
