@@ -24,7 +24,7 @@ rule metric_resample:
         curr_sphere = "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-fsaverage_sphere.reg.surf.gii",
         target_sphere = "resources/standard_mesh_atlases/resample_fsaverage/fs_LR-deformed_to-fsaverage.{hemi}.sphere.32k_fs_LR.surf.gii"
     output:
-        "{output-dir}/32k_space_surfaces/sub-{subject}/sub-{subject}_hemi-{hemi}_task-{task}_run-{run}_space-fsLR_den-32k_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.func.gii"
+        "{output_dir}/32k_space_surfaces/sub-{subject}/sub-{subject}_hemi-{hemi}_task-{task}_run-{run}_space-fsLR_den-32k_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.func.gii"
     shell:
         "wb_command -metric-resample {input.vol2surf_out} {input.curr_sphere} {input.target_sphere} BARYCENTRIC {output}"
 
