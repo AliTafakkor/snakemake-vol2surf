@@ -27,22 +27,22 @@ pybids_inputs:
       - fwhm
       - conf
     custom_path:
-      "{bold_dir}/sub-{subject}/func/sub-{subject}_task-{task}_run-{run}_space-T1w_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.nii.gz"
+      "/project/6050199/alit/EpLink/eplink-p3-denoise-out/results/sub-{subject}/func/sub-{subject}_task-{task}_run-{run}_space-T1w_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.nii.gz"
   midthickness:
     wildcards:
       - subject
       - hemi
     custom_path:
-      "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_midthickness.surf.gii"
+      "/project/6050199/alit/EpLink/eplink-p3-hcp-mmp-out/hcp_mmp/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_midthickness.surf.gii"
   white:
     wildcards:
       - subject
       - hemi
     custom_path:
-      "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_white.surf.gii"
+      "/project/6050199/alit/EpLink/eplink-p3-hcp-mmp-out/hcp_mmp/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_white.surf.gii"
   pial:
     wildcards:
       - subject
       - hemi
     custom_path:
-      "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_pial.surf.gii"
+      "/project/6050199/alit/EpLink/eplink-p3-hcp-mmp-out/hcp_mmp/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_pial.surf.gii"
