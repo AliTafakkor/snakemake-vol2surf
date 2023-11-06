@@ -1,0 +1,12 @@
+configfile: "config/config.yml"
+
+rule vol2surf:
+    input:
+        bold = "{bold_dir}/sub-{subject}/func/sub-{subject}_task-{task}_run-{run}_space-T1w_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.nii.gz"
+        midthickness = "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_midthickness.surf.gii"
+        white = "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_white.surf.gii"
+        pial = "{surf_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_space-native_pial.surf.gii"
+    output:
+        "{output_dir}/sub-{subject}/sub-{subject}_hemi-{hemi}_task-{task}_run-{run}_space-native_desc-denoised_fwhm-{fwhm}_confounds-{conf}_bold.func.gii"
+    shell:
+        "wb_command -volume-to-surface-mapping {input.bold} {input.midthickness} {output} -ribbon-constrained {input.white} {input.pial}"
