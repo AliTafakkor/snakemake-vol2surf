@@ -1,4 +1,17 @@
+from snakebids import generate_inputs
+
+inputs = generate_inputs(bids_dir="", pybids_inputs=config["pybids_inputs"])
+
+valid_inputs = inputs["bold"].filter(**inputs["midthickness"].entities["subject",])
+
 configfile: "config/config.yml"
+
+rule all:
+    input:
+        expand(
+            valid_inputs.expand(rules.metric_resample.output, allow_missing=True),
+            hemi=config['hemi']
+        )
 
 rule vol2surf:
     input:
